@@ -73,7 +73,7 @@ On success this writes:
 npm run replay -- --artifact ../../artifacts/lookup_member_savings_balance.v1.json \
   --params '{"member_id":"12345"}'
 ```
-*(run from `packages/agent`; from the repo root use `npm run replay --workspace packages/agent -- --artifact ../../artifacts/... --params '...'`)*
+(run from the repo root, like every command in this section — the artifact path is relative to `packages/agent`, where npm's `-w` workspace flag runs the underlying script from)
 
 This re-runs the same 7 steps with stable locators, verifies the success checkpoint, and returns:
 ```json
@@ -96,7 +96,7 @@ The last one (`member_id:""`) deliberately drives the flow to a state the artifa
 Type "resume" to hand control back to automation, or "abandon" to stop the run:
 ```
 
-At that point you (or, non-interactively, `echo "resume" | npm run replay -- ...`) can drive the same live browser window by hand, then type `resume` to hand control back, or `abandon` to stop the run. See `evidence/replay-*` for a captured example of this trail (failure screenshot, escalation before/after screenshots, resolution).
+At that point you can take over the same live browser window by hand, then type `resume` to hand control back (automation retries the same step, so this only makes sense once you've actually fixed the on-screen state) or `abandon` to stop the run. To reproduce this non-interactively without touching the browser, pipe `abandon` — `echo "abandon" | npm run replay -- ...` — since piping `resume` without fixing anything just retries into the same failure and re-escalates, waiting on an answer that already ran out. See `evidence/replay-*` for a captured example of this trail (failure screenshot, escalation before/after screenshots, resolution).
 
 **4. A second capability** — a multi-field form with an irreversible action, opening a new sub-account — is included as a hand-authored fixture artifact (`artifacts/open_member_sub_account.v1.json`), used to validate the replay engine's handling of parameterized forms, validation errors, and the unattended-replay approval gate for irreversible actions (see REPORT.md §7, "Cuts", for why this one wasn't also discovery-recorded):
 
