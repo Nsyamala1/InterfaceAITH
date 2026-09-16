@@ -32,6 +32,14 @@ cp .env.example .env
 
 The mock-bank's login doesn't actually validate these against anything (any non-empty value works — see `packages/mock-bank/src/server.js`), so they aren't real secrets. They're still sourced from `.env` rather than hardcoded in source, matching how a real capability would source per-tenant teller credentials from a secrets store at run time rather than embedding a literal value.
 
+## A note on evaluating this without an API key
+
+No API key is committed here, and it shouldn't be — a key exposed in a public repo gets scraped and abused within minutes. That doesn't block evaluation, though:
+
+- The discovery run is judged by its **evidence**, not by re-executing it. `evidence/discover-*/log.jsonl` (every model tool-call, reasoning, and action) plus 8 real screenshots of the live app *are* the proof it happened — per the assignment, that's the intended way to assess it ("we can't assess a description of it," not "re-run it yourself").
+- **Replay needs no credentials at all.** `npm run mock-bank` + `npm run replay -- ...` reproduces the deterministic path live, with zero setup beyond Node — this is the part meant to be run directly.
+- To re-run discovery itself, drop your own `ANTHROPIC_API_KEY` into `.env` (see Setup above) — same as any project that calls a paid API.
+
 ## Running without live services
 
 - **Replay never touches the LLM or the network beyond the target app.** It only needs the mock-bank running locally — no API key required.
