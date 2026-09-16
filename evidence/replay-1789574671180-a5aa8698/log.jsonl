@@ -1,0 +1,38 @@
+{"ts":"2026-09-16T16:04:31.180Z","runId":"replay-1789574671180-a5aa8698","kind":"replay","artifactName":"open_member_sub_account","artifactVersion":1,"params":{"member_id":"12345","account_type":"savings","initial_deposit":"100"}}
+{"ts":"2026-09-16T16:04:31.751Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-1","description":"Go to the teller console entry point.","action":"navigate"}
+{"ts":"2026-09-16T16:04:31.784Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-1","ok":true}
+{"ts":"2026-09-16T16:04:31.784Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-2","description":"Enter the teller ID.","action":"type"}
+{"ts":"2026-09-16T16:04:31.806Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-2","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:31.822Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-2","ok":true}
+{"ts":"2026-09-16T16:04:31.822Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-3","description":"Enter the teller password.","action":"type"}
+{"ts":"2026-09-16T16:04:31.829Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-3","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:31.872Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-3","ok":true}
+{"ts":"2026-09-16T16:04:31.873Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-4","description":"Submit login.","action":"click"}
+{"ts":"2026-09-16T16:04:31.877Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-4","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:31.917Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-4","ok":true}
+{"ts":"2026-09-16T16:04:31.917Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-5","description":"Enter the member ID to search for.","action":"type"}
+{"ts":"2026-09-16T16:04:31.931Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-5","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:31.934Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-5","ok":true}
+{"ts":"2026-09-16T16:04:31.934Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-6","description":"Submit the search.","action":"click"}
+{"ts":"2026-09-16T16:04:31.937Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-6","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:31.971Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-6","ok":true}
+{"ts":"2026-09-16T16:04:31.971Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-7","description":"Open the matched member's detail page to confirm the member resolved before proceeding.","action":"click"}
+{"ts":"2026-09-16T16:04:31.988Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-7","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:32.032Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-7","ok":true}
+{"ts":"2026-09-16T16:04:32.033Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-8","description":"Go to the new sub-account form for this member.","action":"navigate"}
+{"ts":"2026-09-16T16:04:32.065Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-8","ok":true}
+{"ts":"2026-09-16T16:04:32.065Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-9","description":"Choose the sub-account type.","action":"select"}
+{"ts":"2026-09-16T16:04:32.068Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-9","actionType":"select","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:32.074Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-9","ok":true}
+{"ts":"2026-09-16T16:04:32.074Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-10","description":"Enter the initial deposit.","action":"type"}
+{"ts":"2026-09-16T16:04:32.077Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-10","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:32.080Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-10","ok":true}
+{"ts":"2026-09-16T16:04:32.080Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-11","description":"Submit the sub-account form. This triggers a native confirmation dialog, which replay auto-accepts and logs.","action":"click"}
+{"ts":"2026-09-16T16:04:32.083Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-11","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:32.108Z","runId":"replay-1789574671180-a5aa8698","kind":"dialog_handled","message":"Confirm: open a new sub-account for this member?","dialogType":"confirm"}
+{"ts":"2026-09-16T16:04:32.154Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-11","ok":true}
+{"ts":"2026-09-16T16:04:32.154Z","runId":"replay-1789574671180-a5aa8698","kind":"step_started","stepId":"step-12","description":"Read the confirmation number.","action":"extract"}
+{"ts":"2026-09-16T16:04:32.165Z","runId":"replay-1789574671180-a5aa8698","kind":"locator_resolved","stepId":"step-12","actionType":"extract","usedStrategy":"css","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:32.166Z","runId":"replay-1789574671180-a5aa8698","kind":"step_result","stepId":"step-12","ok":true}
+{"ts":"2026-09-16T16:04:32.167Z","runId":"replay-1789574671180-a5aa8698","kind":"run_result","status":"success","outputs":{"confirmation_number":"SA-1005"}}
+{"ts":"2026-09-16T16:04:32.167Z","runId":"replay-1789574671180-a5aa8698","kind":"run_result","status":"success","outputs":{"confirmation_number":"SA-1005"},"stepsExecuted":12}

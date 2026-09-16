@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "1.0",
+  "id": "fixture-open-sub-account",
+  "name": "open_member_sub_account",
+  "description": "Log in, find a member, and open a new sub-account for them, reaching the confirmation screen.",
+  "version": 1,
+  "createdAt": "2026-09-09T00:00:00.000Z",
+  "target": {
+    "appId": "meridian-teller-console",
+    "surface": "web",
+    "baseUrl": "http://localhost:3000"
+  },
+  "parameters": [
+    { "name": "member_id", "type": "string", "required": true, "description": "The member ID to open a sub-account for.", "example": "12345" },
+    { "name": "account_type", "type": "string", "required": true, "description": "Sub-account type: savings, christmas_club, or youth_savings.", "example": "savings" },
+    { "name": "initial_deposit", "type": "string", "required": true, "description": "Initial deposit amount in USD, must be >= 25.", "example": "100" }
+  ],
+  "outputs": [
+    { "name": "confirmation_number", "type": "string", "description": "The confirmation number for the newly opened sub-account." }
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "description": "Go to the teller console entry point.",
+      "action": { "type": "navigate", "url": "http://localhost:3000/login" }
+    },
+    {
+      "id": "step-2",
+      "description": "Enter the teller ID.",
+      "action": {
+        "type": "type",
+        "target": { "primary": { "by": "label", "name": "Teller ID" }, "fallbacks": [{ "by": "css", "css": "#username" }], "reasoning": "Label association is stable form semantics." },
+        "value": "teller1"
+      }
+    },
+    {
+      "id": "step-3",
+      "description": "Enter the teller password.",
+      "action": {
+        "type": "type",
+        "target": { "primary": { "by": "label", "name": "Password" }, "fallbacks": [{ "by": "css", "css": "#password" }], "reasoning": "Label association is stable form semantics." },
+        "value": "demo-pass123"
+      }
+    },
+    {
+      "id": "step-4",
+      "description": "Submit login.",
+      "action": {
+        "type": "click",
+        "target": { "primary": { "by": "role", "role": "button", "name": "Log In" }, "fallbacks": [{ "by": "text", "text": "Log In" }], "reasoning": "Button accessible name from visible text." }
+      },
+      "checkpoint": { "kind": "urlMatches", "urlPattern": "^/members/search$", "timeoutMs": 5000 }
+    },
+    {
+      "id": "step-5",
+      "description": "Enter the member ID to search for.",
+      "action": {
+        "type": "type",
+        "target": { "primary": { "by": "label", "name": "Member ID" }, "fallbacks": [{ "by": "css", "css": "#memberId" }], "reasoning": "Label association is stable form semantics." },
+        "paramRef": "member_id"
+      }
+    },
+    {
+      "id": "step-6",
+      "description": "Submit the search.",
+      "action": {
+        "type": "click",
+        "target": { "primary": { "by": "role", "role": "button", "name": "Search" }, "fallbacks": [{ "by": "text", "text": "Search" }], "reasoning": "Button accessible name from visible text." }
+      }
+    },
+    {
+      "id": "step-7",
+      "description": "Open the matched member's detail page to confirm the member resolved before proceeding.",
+      "action": {
+        "type": "click",
+        "target": { "primary": { "by": "role", "role": "link", "name": "View" }, "fallbacks": [{ "by": "text", "text": "View" }], "reasoning": "Link accessible name from visible text; only one result row is expected for an exact-ID search." }
+      }
+    },
+    {
+      "id": "step-8",
+      "description": "Go to the new sub-account form for this member.",
+      "action": { "type": "navigate", "url": "/members/{{member_id}}/sub-accounts/new" },
+      "checkpoint": { "kind": "elementVisible", "target": { "primary": { "by": "label", "name": "Sub-Account Type" }, "fallbacks": [{ "by": "css", "css": "#accountType" }], "reasoning": "Label association is stable form semantics." }, "timeoutMs": 5000 }
+    },
+    {
+      "id": "step-9",
+      "description": "Choose the sub-account type.",
+      "action": {
+        "type": "select",
+        "target": { "primary": { "by": "label", "name": "Sub-Account Type" }, "fallbacks": [{ "by": "css", "css": "#accountType" }], "reasoning": "Label association is stable form semantics." },
+        "paramRef": "account_type"
+      }
+    },
+    {
+      "id": "step-10",
+      "description": "Enter the initial deposit.",
+      "action": {
+        "type": "type",
+        "target": { "primary": { "by": "label", "name": "Initial Deposit (USD)" }, "fallbacks": [{ "by": "css", "css": "#initialDeposit" }], "reasoning": "Label association is stable form semantics." },
+        "paramRef": "initial_deposit"
+      }
+    },
+    {
+      "id": "step-11",
+      "description": "Submit the sub-account form. This triggers a native confirmation dialog, which replay auto-accepts and logs.",
+      "action": {
+        "type": "click",
+        "target": { "primary": { "by": "role", "role": "button", "name": "Open Sub-Account" }, "fallbacks": [{ "by": "text", "text": "Open Sub-Account" }], "reasoning": "Button accessible name from visible text." }
+      },
+      "checkpoint": { "kind": "textContains", "text": "Sub-account opened successfully", "timeoutMs": 5000 }
+    },
+    {
+      "id": "step-12",
+      "description": "Read the confirmation number.",
+      "action": {
+        "type": "extract",
+        "target": { "primary": { "by": "css", "css": "#confirmation-number" }, "fallbacks": [], "reasoning": "The confirmation number cell has no accessible label of its own; the app assigns it a stable element id for this exact kind of read." },
+        "outputRef": "confirmation_number"
+      }
+    }
+  ],
+  "knownOutcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "category": "business",
+      "description": "No member exists with the given ID.",
+      "detection": { "kind": "textContains", "text": "No member found with ID", "timeoutMs": 1000 }
+    },
+    {
+      "code": "PERMISSION_DENIED",
+      "category": "business",
+      "description": "The member record is restricted and the current teller is not authorized to view it.",
+      "detection": { "kind": "textContains", "text": "not authorized to view member", "timeoutMs": 1000 }
+    },
+    {
+      "code": "VALIDATION_ERROR",
+      "category": "business",
+      "description": "The sub-account form was submitted with an invalid initial deposit.",
+      "detection": { "kind": "textContains", "text": "Initial deposit must be a number", "timeoutMs": 1000 }
+    },
+    {
+      "code": "SESSION_EXPIRED",
+      "category": "recoverable",
+      "description": "The teller session expired mid-flow and the app redirected to a login/expired page.",
+      "detection": { "kind": "textContains", "text": "Your session has expired", "timeoutMs": 1000 },
+      "recovery": { "action": "reauthenticate", "maxAttempts": 1 }
+    }
+  ],
+  "successCheckpoint": {
+    "kind": "elementVisible",
+    "target": { "primary": { "by": "css", "css": "#confirmation-number" }, "fallbacks": [], "reasoning": "Reaching the goal means the confirmation number cell is visible." },
+    "timeoutMs": 5000
+  },
+  "policy": { "riskLevel": "irreversible", "requiresApprovalToReplayUnattended": true },
+  "discoveredFrom": {
+    "runId": "fixture-hand-authored-for-engine-validation",
+    "model": "n/a",
+    "discoveredAt": "2026-09-09T00:00:00.000Z"
+  }
+}

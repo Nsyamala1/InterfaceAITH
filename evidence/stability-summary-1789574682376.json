@@ -1,0 +1,66 @@
+{
+  "n": 5,
+  "successCount": 5,
+  "businessOutcomeCounts": {},
+  "hardFailureCount": 0,
+  "successRate": 1,
+  "perStep": [
+    {
+      "stepId": "step-1",
+      "primary": 5,
+      "fallback": {}
+    },
+    {
+      "stepId": "step-2",
+      "primary": 5,
+      "fallback": {}
+    },
+    {
+      "stepId": "step-3",
+      "primary": 5,
+      "fallback": {}
+    },
+    {
+      "stepId": "step-4",
+      "primary": 5,
+      "fallback": {}
+    },
+    {
+      "stepId": "step-5",
+      "primary": 5,
+      "fallback": {}
+    },
+    {
+      "stepId": "step-6",
+      "primary": 5,
+      "fallback": {}
+    },
+    {
+      "stepId": "step-7",
+      "primary": 5,
+      "fallback": {}
+    }
+  ],
+  "runs": [
+    {
+      "runId": "stability-1789574677407-2471a50a",
+      "status": "success"
+    },
+    {
+      "runId": "stability-1789574678467-784f91f8",
+      "status": "success"
+    },
+    {
+      "runId": "stability-1789574679377-997abd2b",
+      "status": "success"
+    },
+    {
+      "runId": "stability-1789574680283-168114b2",
+      "status": "success"
+    },
+    {
+      "runId": "stability-1789574681195-6289d0bd",
+      "status": "success"
+    }
+  ]
+}

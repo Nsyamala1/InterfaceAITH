@@ -1,0 +1,34 @@
+{"ts":"2026-09-16T16:04:32.736Z","runId":"replay-1789574672735-e2f1ede0","kind":"replay","artifactName":"open_member_sub_account","artifactVersion":1,"params":{"member_id":"12345","account_type":"savings","initial_deposit":"abc"}}
+{"ts":"2026-09-16T16:04:33.297Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-1","description":"Go to the teller console entry point.","action":"navigate"}
+{"ts":"2026-09-16T16:04:33.322Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-1","ok":true}
+{"ts":"2026-09-16T16:04:33.322Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-2","description":"Enter the teller ID.","action":"type"}
+{"ts":"2026-09-16T16:04:33.352Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-2","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.359Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-2","ok":true}
+{"ts":"2026-09-16T16:04:33.359Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-3","description":"Enter the teller password.","action":"type"}
+{"ts":"2026-09-16T16:04:33.362Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-3","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.404Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-3","ok":true}
+{"ts":"2026-09-16T16:04:33.404Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-4","description":"Submit login.","action":"click"}
+{"ts":"2026-09-16T16:04:33.408Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-4","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.449Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-4","ok":true}
+{"ts":"2026-09-16T16:04:33.450Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-5","description":"Enter the member ID to search for.","action":"type"}
+{"ts":"2026-09-16T16:04:33.463Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-5","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.466Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-5","ok":true}
+{"ts":"2026-09-16T16:04:33.466Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-6","description":"Submit the search.","action":"click"}
+{"ts":"2026-09-16T16:04:33.470Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-6","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.501Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-6","ok":true}
+{"ts":"2026-09-16T16:04:33.501Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-7","description":"Open the matched member's detail page to confirm the member resolved before proceeding.","action":"click"}
+{"ts":"2026-09-16T16:04:33.515Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-7","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.545Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-7","ok":true}
+{"ts":"2026-09-16T16:04:33.545Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-8","description":"Go to the new sub-account form for this member.","action":"navigate"}
+{"ts":"2026-09-16T16:04:33.569Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-8","ok":true}
+{"ts":"2026-09-16T16:04:33.569Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-9","description":"Choose the sub-account type.","action":"select"}
+{"ts":"2026-09-16T16:04:33.571Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-9","actionType":"select","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.573Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-9","ok":true}
+{"ts":"2026-09-16T16:04:33.573Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-10","description":"Enter the initial deposit.","action":"type"}
+{"ts":"2026-09-16T16:04:33.574Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-10","actionType":"type","usedStrategy":"label","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.577Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_result","stepId":"step-10","ok":true}
+{"ts":"2026-09-16T16:04:33.578Z","runId":"replay-1789574672735-e2f1ede0","kind":"step_started","stepId":"step-11","description":"Submit the sub-account form. This triggers a native confirmation dialog, which replay auto-accepts and logs.","action":"click"}
+{"ts":"2026-09-16T16:04:33.580Z","runId":"replay-1789574672735-e2f1ede0","kind":"locator_resolved","stepId":"step-11","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:33.596Z","runId":"replay-1789574672735-e2f1ede0","kind":"dialog_handled","message":"Confirm: open a new sub-account for this member?","dialogType":"confirm"}
+{"ts":"2026-09-16T16:04:33.632Z","runId":"replay-1789574672735-e2f1ede0","kind":"known_outcome_matched","stepId":"step-11","code":"VALIDATION_ERROR","category":"business"}
+{"ts":"2026-09-16T16:04:33.632Z","runId":"replay-1789574672735-e2f1ede0","kind":"run_result","status":"business_outcome","code":"VALIDATION_ERROR","description":"The sub-account form was submitted with an invalid initial deposit.","outputs":{"member_id":"12345","account_type":"savings","initial_deposit":"abc"},"stepsExecuted":10}

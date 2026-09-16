@@ -1,0 +1,24 @@
+{"ts":"2026-09-16T16:03:48.339Z","runId":"replay-1789574628339-749fb07b","kind":"replay","artifactName":"lookup_member_savings_balance","artifactVersion":1,"params":{"member_id":"30500"}}
+{"ts":"2026-09-16T16:03:49.291Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-1","description":"Login with teller ID","action":"type"}
+{"ts":"2026-09-16T16:03:49.333Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-1","actionType":"type","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.359Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-1","ok":true}
+{"ts":"2026-09-16T16:03:49.359Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-2","description":"Enter password","action":"type"}
+{"ts":"2026-09-16T16:03:49.372Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-2","actionType":"type","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.404Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-2","ok":true}
+{"ts":"2026-09-16T16:03:49.404Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-3","description":"Submit login form","action":"click"}
+{"ts":"2026-09-16T16:03:49.407Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-3","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.444Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-3","ok":true}
+{"ts":"2026-09-16T16:03:49.444Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-4","description":"Enter member ID to search","action":"type"}
+{"ts":"2026-09-16T16:03:49.464Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-4","actionType":"type","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.473Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-4","ok":true}
+{"ts":"2026-09-16T16:03:49.473Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-5","description":"Submit search for member ID 12345","action":"click"}
+{"ts":"2026-09-16T16:03:49.475Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-5","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.509Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-5","ok":true}
+{"ts":"2026-09-16T16:03:49.511Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-6","description":"View member details","action":"click"}
+{"ts":"2026-09-16T16:03:49.529Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-6","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.576Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-6","ok":true}
+{"ts":"2026-09-16T16:03:49.576Z","runId":"replay-1789574628339-749fb07b","kind":"step_started","stepId":"step-7","description":"Capture the savings balance value shown on the member detail page as required by the goal.","action":"extract"}
+{"ts":"2026-09-16T16:03:49.593Z","runId":"replay-1789574628339-749fb07b","kind":"locator_resolved","stepId":"step-7","actionType":"extract","usedStrategy":"css","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:03:49.595Z","runId":"replay-1789574628339-749fb07b","kind":"step_result","stepId":"step-7","ok":true}
+{"ts":"2026-09-16T16:03:49.595Z","runId":"replay-1789574628339-749fb07b","kind":"run_result","status":"success","outputs":{"savings_balance":"$15200.90"}}
+{"ts":"2026-09-16T16:03:49.595Z","runId":"replay-1789574628339-749fb07b","kind":"run_result","status":"success","outputs":{"savings_balance":"$15200.90"},"stepsExecuted":7}

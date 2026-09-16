@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "1.0",
+  "id": "89796933-0a13-4088-8053-12a27c62e4c1",
+  "name": "lookup_member_savings_balance",
+  "description": "Look up a member by ID and read their current savings balance.",
+  "version": 1,
+  "createdAt": "2026-09-16T16:03:22.464Z",
+  "target": {
+    "appId": "meridian-teller-console",
+    "surface": "web",
+    "baseUrl": "http://localhost:3000"
+  },
+  "parameters": [
+    {
+      "name": "member_id",
+      "type": "string",
+      "required": true,
+      "description": "Value for \"Member ID\", supplied by the caller.",
+      "example": "12345"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "savings_balance",
+      "type": "string",
+      "description": "Current savings account balance for member 12345 (John Castillo)"
+    }
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "description": "Login with teller ID",
+      "action": {
+        "type": "type",
+        "target": {
+          "primary": {
+            "by": "role",
+            "role": "textbox",
+            "name": "Teller ID"
+          },
+          "fallbacks": [
+            {
+              "by": "text",
+              "text": "Teller ID"
+            },
+            {
+              "by": "css",
+              "css": "input:nth-of-type(1)"
+            }
+          ],
+          "reasoning": "Role+accessible-name (\"textbox\"/\"Teller ID\") comes from real semantics (label association or visible button/link text), so it survives markup/CSS changes and requires no test IDs. Text-match and structural CSS are kept as fallbacks in case the element's role changes but its copy doesn't (or vice versa)."
+        },
+        "value": "teller1"
+      }
+    },
+    {
+      "id": "step-2",
+      "description": "Enter password",
+      "action": {
+        "type": "type",
+        "target": {
+          "primary": {
+            "by": "role",
+            "role": "textbox",
+            "name": "Password"
+          },
+          "fallbacks": [
+            {
+              "by": "text",
+              "text": "Password"
+            },
+            {
+              "by": "css",
+              "css": "input:nth-of-type(2)"
+            }
+          ],
+          "reasoning": "Role+accessible-name (\"textbox\"/\"Password\") comes from real semantics (label association or visible button/link text), so it survives markup/CSS changes and requires no test IDs. Text-match and structural CSS are kept as fallbacks in case the element's role changes but its copy doesn't (or vice versa)."
+        },
+        "value": "demo-pass123"
+      }
+    },
+    {
+      "id": "step-3",
+      "description": "Submit login form",
+      "action": {
+        "type": "click",
+        "target": {
+          "primary": {
+            "by": "role",
+            "role": "button",
+            "name": "Log In"
+          },
+          "fallbacks": [
+            {
+              "by": "text",
+              "text": "Log In"
+            },
+            {
+              "by": "css",
+              "css": "button:nth-of-type(3)"
+            }
+          ],
+          "reasoning": "Role+accessible-name (\"button\"/\"Log In\") comes from real semantics (label association or visible button/link text), so it survives markup/CSS changes and requires no test IDs. Text-match and structural CSS are kept as fallbacks in case the element's role changes but its copy doesn't (or vice versa)."
+        }
+      }
+    },
+    {
+      "id": "step-4",
+      "description": "Enter member ID to search",
+      "action": {
+        "type": "type",
+        "target": {
+          "primary": {
+            "by": "role",
+            "role": "textbox",
+            "name": "Member ID"
+          },
+          "fallbacks": [
+            {
+              "by": "text",
+              "text": "Member ID"
+            },
+            {
+              "by": "css",
+              "css": "input:nth-of-type(1)"
+            }
+          ],
+          "reasoning": "Role+accessible-name (\"textbox\"/\"Member ID\") comes from real semantics (label association or visible button/link text), so it survives markup/CSS changes and requires no test IDs. Text-match and structural CSS are kept as fallbacks in case the element's role changes but its copy doesn't (or vice versa)."
+        },
+        "paramRef": "member_id"
+      }
+    },
+    {
+      "id": "step-5",
+      "description": "Submit search for member ID 12345",
+      "action": {
+        "type": "click",
+        "target": {
+          "primary": {
+            "by": "role",
+            "role": "button",
+            "name": "Search"
+          },
+          "fallbacks": [
+            {
+              "by": "text",
+              "text": "Search"
+            },
+            {
+              "by": "css",
+              "css": "button:nth-of-type(2)"
+            }
+          ],
+          "reasoning": "Role+accessible-name (\"button\"/\"Search\") comes from real semantics (label association or visible button/link text), so it survives markup/CSS changes and requires no test IDs. Text-match and structural CSS are kept as fallbacks in case the element's role changes but its copy doesn't (or vice versa)."
+        }
+      }
+    },
+    {
+      "id": "step-6",
+      "description": "View member details",
+      "action": {
+        "type": "click",
+        "target": {
+          "primary": {
+            "by": "role",
+            "role": "link",
+            "name": "View"
+          },
+          "fallbacks": [
+            {
+              "by": "text",
+              "text": "View"
+            },
+            {
+              "by": "css",
+              "css": "a:nth-of-type(3)"
+            }
+          ],
+          "reasoning": "Role+accessible-name (\"link\"/\"View\") comes from real semantics (label association or visible button/link text), so it survives markup/CSS changes and requires no test IDs. Text-match and structural CSS are kept as fallbacks in case the element's role changes but its copy doesn't (or vice versa)."
+        }
+      }
+    },
+    {
+      "id": "step-7",
+      "description": "Capture the savings balance value shown on the member detail page as required by the goal.",
+      "action": {
+        "type": "extract",
+        "target": {
+          "primary": {
+            "by": "css",
+            "css": "tr:has-text(\"Savings\") >> td:nth-child(2)"
+          },
+          "fallbacks": [
+            {
+              "by": "role",
+              "role": "cell",
+              "name": "$8452.13"
+            }
+          ],
+          "reasoning": "Data cell: its own text (\"$8452.13\") is the value being read, not a stable name, so it can't anchor the locator. Anchored instead on the row's label cell (\"Savings\") plus column position -- true for any record, not just the one open at discovery time. The exact role+value match from discovery is kept only as a last-resort fallback."
+        },
+        "outputRef": "savings_balance"
+      }
+    }
+  ],
+  "knownOutcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "category": "business",
+      "description": "No member exists with the given ID.",
+      "detection": {
+        "kind": "textContains",
+        "text": "No member found with ID",
+        "timeoutMs": 1000
+      }
+    },
+    {
+      "code": "PERMISSION_DENIED",
+      "category": "business",
+      "description": "The member record is restricted and the current teller is not authorized to view it.",
+      "detection": {
+        "kind": "textContains",
+        "text": "not authorized to view member",
+        "timeoutMs": 1000
+      }
+    },
+    {
+      "code": "VALIDATION_ERROR",
+      "category": "business",
+      "description": "The sub-account form was submitted with an invalid initial deposit.",
+      "detection": {
+        "kind": "textContains",
+        "text": "Initial deposit must be a number",
+        "timeoutMs": 1000
+      }
+    },
+    {
+      "code": "SESSION_EXPIRED",
+      "category": "recoverable",
+      "description": "The teller session expired mid-flow and the app redirected to a login/expired page.",
+      "detection": {
+        "kind": "textContains",
+        "text": "Your session has expired",
+        "timeoutMs": 1000
+      },
+      "recovery": {
+        "action": "reauthenticate",
+        "maxAttempts": 1
+      }
+    }
+  ],
+  "successCheckpoint": {
+    "kind": "urlMatches",
+    "urlPattern": "^/members/[^/]+$",
+    "timeoutMs": 5000
+  },
+  "policy": {
+    "riskLevel": "safe",
+    "requiresApprovalToReplayUnattended": false
+  },
+  "discoveredFrom": {
+    "runId": "discover-1789574584670-6173158e",
+    "model": "claude-sonnet-5",
+    "discoveredAt": "2026-09-16T16:03:22.464Z"
+  }
+}

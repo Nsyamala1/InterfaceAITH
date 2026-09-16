@@ -1,0 +1,22 @@
+{"ts":"2026-09-16T16:04:02.461Z","runId":"replay-1789574642461-04376899","kind":"replay","artifactName":"lookup_member_savings_balance","artifactVersion":1,"params":{"member_id":"90001"}}
+{"ts":"2026-09-16T16:04:03.338Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-1","description":"Login with teller ID","action":"type"}
+{"ts":"2026-09-16T16:04:03.394Z","runId":"replay-1789574642461-04376899","kind":"locator_resolved","stepId":"step-1","actionType":"type","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:03.412Z","runId":"replay-1789574642461-04376899","kind":"step_result","stepId":"step-1","ok":true}
+{"ts":"2026-09-16T16:04:03.413Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-2","description":"Enter password","action":"type"}
+{"ts":"2026-09-16T16:04:03.421Z","runId":"replay-1789574642461-04376899","kind":"locator_resolved","stepId":"step-2","actionType":"type","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:03.453Z","runId":"replay-1789574642461-04376899","kind":"step_result","stepId":"step-2","ok":true}
+{"ts":"2026-09-16T16:04:03.454Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-3","description":"Submit login form","action":"click"}
+{"ts":"2026-09-16T16:04:03.456Z","runId":"replay-1789574642461-04376899","kind":"locator_resolved","stepId":"step-3","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:03.497Z","runId":"replay-1789574642461-04376899","kind":"step_result","stepId":"step-3","ok":true}
+{"ts":"2026-09-16T16:04:03.497Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-4","description":"Enter member ID to search","action":"type"}
+{"ts":"2026-09-16T16:04:03.514Z","runId":"replay-1789574642461-04376899","kind":"locator_resolved","stepId":"step-4","actionType":"type","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:03.521Z","runId":"replay-1789574642461-04376899","kind":"step_result","stepId":"step-4","ok":true}
+{"ts":"2026-09-16T16:04:03.521Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-5","description":"Submit search for member ID 12345","action":"click"}
+{"ts":"2026-09-16T16:04:03.523Z","runId":"replay-1789574642461-04376899","kind":"locator_resolved","stepId":"step-5","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:03.550Z","runId":"replay-1789574642461-04376899","kind":"step_result","stepId":"step-5","ok":true}
+{"ts":"2026-09-16T16:04:03.550Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-6","description":"View member details","action":"click"}
+{"ts":"2026-09-16T16:04:03.571Z","runId":"replay-1789574642461-04376899","kind":"locator_resolved","stepId":"step-6","actionType":"click","usedStrategy":"role","usedFallbackIndex":null}
+{"ts":"2026-09-16T16:04:03.615Z","runId":"replay-1789574642461-04376899","kind":"step_result","stepId":"step-6","ok":true}
+{"ts":"2026-09-16T16:04:03.615Z","runId":"replay-1789574642461-04376899","kind":"step_started","stepId":"step-7","description":"Capture the savings balance value shown on the member detail page as required by the goal.","action":"extract"}
+{"ts":"2026-09-16T16:04:09.633Z","runId":"replay-1789574642461-04376899","kind":"known_outcome_matched","stepId":"step-7","code":"PERMISSION_DENIED","category":"business"}
+{"ts":"2026-09-16T16:04:09.634Z","runId":"replay-1789574642461-04376899","kind":"run_result","status":"business_outcome","code":"PERMISSION_DENIED","description":"The member record is restricted and the current teller is not authorized to view it.","outputs":{"member_id":"90001"},"stepsExecuted":6}
