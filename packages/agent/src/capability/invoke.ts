@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import type { Page } from "playwright";
 import { chromium } from "playwright";
 import { loadCapability } from "./catalog.js";
 import { replayArtifact } from "../replay/engine.js";
@@ -6,6 +7,7 @@ import type { ReplayResult } from "../replay/result.js";
 import { EvidenceLogger } from "../log/logger.js";
 import { defaultAllowlist } from "../safety/allowlist.js";
 import { requestIntervention } from "../escalation/intervention.js";
+import { requireEnv } from "../env.js";
 
 // ---------------------------------------------------------------------------
 // The one function an agent-facing surface actually needs: "call this
@@ -17,6 +19,17 @@ import { requestIntervention } from "../escalation/intervention.js";
 // `--invoke` calls, and it's exactly the call an AI agent's tool-use runtime
 // would make after discovering the capability via toolSchema.ts.
 // ---------------------------------------------------------------------------
+
+// Shared with cli/replay.ts's own reauthenticate handler: credentials come
+// from .env, never a literal in source, since a real capability replays
+// across many tenants, each with its own teller account sourced from a
+// secrets store at run time (see REPORT.md "Safety").
+async function reauthenticate(page: Page, baseUrl: string): Promise<void> {
+  await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+  await page.getByLabel("Teller ID").fill(requireEnv("TELLER_ID"));
+  await page.getByLabel("Password").fill(requireEnv("TELLER_PASSWORD"));
+  await page.getByRole("button", { name: "Log In" }).click();
+}
 
 export interface InvokeOptions {
   artifactsDir: string;
@@ -51,6 +64,7 @@ export async function invokeCapability(opts: InvokeOptions): Promise<ReplayResul
       allowlist: defaultAllowlist,
       logger,
       approvedForUnattendedReplay: opts.approvedForUnattendedReplay,
+      reauthenticate: (page: Page) => reauthenticate(page, artifact.target.baseUrl),
       onStuck: async ({ step, message, screenshotPath }) => {
         const outcome = await requestIntervention({
           page,

@@ -27,7 +27,10 @@ cp .env.example .env
 |---|---|---|
 | `ANTHROPIC_API_KEY` | `discover` only | — (throws if unset) |
 | `ANTHROPIC_MODEL` | `discover` only | `claude-sonnet-5` |
-| `HEADLESS` | both | `false` (a visible browser window, so a human can actually see/take over the live session — see REPORT.md §5) |
+| `HEADLESS` | all commands | `false` (a visible browser window, so a human can actually see/take over the live session — see REPORT.md §5) |
+| `TELLER_ID` / `TELLER_PASSWORD` | `discover`, `replay` (session-expiry recovery), `capabilities --invoke` | `teller1` / `demo-pass123` — throws if unset |
+
+The mock-bank's login doesn't actually validate these against anything (any non-empty value works — see `packages/mock-bank/src/server.js`), so they aren't real secrets. They're still sourced from `.env` rather than hardcoded in source, matching how a real capability would source per-tenant teller credentials from a secrets store at run time rather than embedding a literal value.
 
 ## Running without live services
 
@@ -43,7 +46,7 @@ cp .env.example .env
 npm run mock-bank
 ```
 
-This serves the Teller Console at `http://localhost:3000`. Dummy login: Teller ID `teller1` / Password `demo-pass123` (mock, non-production credential, used only against this local app).
+This serves the Teller Console at `http://localhost:3000`. Login credentials come from `.env` (`TELLER_ID` / `TELLER_PASSWORD`, defaults above) — the mock app accepts any non-empty value, so these aren't real secrets, but they're still config, not hardcoded.
 
 **2. Run the agent on a goal** (genuine LLM-driven discovery — opens a real, visible browser window):
 

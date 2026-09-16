@@ -1,3 +1,4 @@
+import "../env.js";
 import path from "node:path";
 import { listCapabilities } from "../capability/catalog.js";
 import { toToolDefinition } from "../capability/toolSchema.js";

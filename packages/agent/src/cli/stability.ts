@@ -1,3 +1,4 @@
+import "../env.js";
 import path from "node:path";
 import fs from "node:fs";
 import { CapabilityArtifactSchema } from "../artifact/schema.js";

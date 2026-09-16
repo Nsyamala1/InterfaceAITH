@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "id": "89796933-0a13-4088-8053-12a27c62e4c1",
+  "id": "fc24bd7e-060e-418e-a794-c79a7e8f2aec",
   "name": "lookup_member_savings_balance",
   "description": "Look up a member by ID and read their current savings balance.",
   "version": 1,
-  "createdAt": "2026-09-16T16:03:22.464Z",
+  "createdAt": "2026-09-16T16:17:20.500Z",
   "target": {
     "appId": "meridian-teller-console",
     "surface": "web",
@@ -23,13 +23,13 @@
     {
       "name": "savings_balance",
       "type": "string",
-      "description": "Current savings account balance for member 12345 (John Castillo)"
+      "description": "Current savings balance for member 12345 (John Castillo)"
     }
   ],
   "steps": [
     {
       "id": "step-1",
-      "description": "Login with teller ID",
+      "description": "Login with provided credentials",
       "action": {
         "type": "type",
         "target": {
@@ -55,7 +55,7 @@
     },
     {
       "id": "step-2",
-      "description": "Enter password",
+      "description": "Enter password field",
       "action": {
         "type": "type",
         "target": {
@@ -132,7 +132,7 @@
     },
     {
       "id": "step-5",
-      "description": "Submit search for member ID 12345",
+      "description": "Submit search",
       "action": {
         "type": "click",
         "target": {
@@ -182,7 +182,7 @@
     },
     {
       "id": "step-7",
-      "description": "Capture the savings balance value shown on the member detail page as required by the goal.",
+      "description": "Capture the savings balance as requested by the goal",
       "action": {
         "type": "extract",
         "target": {
@@ -259,8 +259,8 @@
     "requiresApprovalToReplayUnattended": false
   },
   "discoveredFrom": {
-    "runId": "discover-1789574584670-6173158e",
+    "runId": "discover-1789575412515-3a6d6267",
     "model": "claude-sonnet-5",
-    "discoveredAt": "2026-09-16T16:03:22.464Z"
+    "discoveredAt": "2026-09-16T16:17:20.500Z"
   }
 }

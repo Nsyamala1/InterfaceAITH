@@ -1,12 +1,8 @@
+import "../env.js";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import fs from "node:fs";
-import { config as loadEnv } from "dotenv";
 import { chromium } from "playwright";
-
-// Load repo-root .env regardless of which package's cwd this script runs
-// from (npm workspace scripts run with cwd set to the package directory).
-loadEnv({ path: path.resolve(process.cwd(), "..", "..", ".env") });
 import { runDiscovery } from "../discover/agentLoop.js";
 import { buildArtifact } from "../discover/artifactBuilder.js";
 import { EvidenceLogger } from "../log/logger.js";

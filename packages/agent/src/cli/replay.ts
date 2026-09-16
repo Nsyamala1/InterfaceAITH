@@ -1,3 +1,4 @@
+import { requireEnv } from "../env.js";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import fs from "node:fs";
@@ -59,9 +60,14 @@ async function main() {
         // an SSO session) -- the point being demonstrated is that the engine
         // detects the session-expired condition and drives a bounded,
         // declared recovery step rather than treating it as a hard failure.
+        // Credentials come from .env, not a literal in source: a real
+        // capability never hardcodes a credential value, since the same
+        // artifact replays across many tenants, each with its own teller
+        // account sourced from a secrets store at run time (see
+        // REPORT.md "Safety").
         await page.goto(artifact.target.baseUrl, { waitUntil: "domcontentloaded" });
-        await page.getByLabel("Teller ID").fill("teller1");
-        await page.getByLabel("Password").fill("demo-pass123");
+        await page.getByLabel("Teller ID").fill(requireEnv("TELLER_ID"));
+        await page.getByLabel("Password").fill(requireEnv("TELLER_PASSWORD"));
         await page.getByRole("button", { name: "Log In" }).click();
       },
       onStuck: async ({ step, message, screenshotPath }) => {

@@ -12,6 +12,7 @@ import type { EvidenceLogger } from "../log/logger.js";
 import { requestIntervention } from "../escalation/intervention.js";
 import { redactTypedValue } from "../safety/redact.js";
 import type { DiscoveryTranscript, TranscriptEntry } from "./transcript.js";
+import { requireEnv } from "../env.js";
 
 const DEFAULT_MODEL = process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5";
 const MAX_STEPS = 20;
@@ -26,14 +27,27 @@ export interface DiscoveryOptions {
   runId: string;
 }
 
-const SYSTEM_PROMPT = (goal: string, baseUrl: string) => `You are operating a real internal banking web application ("Meridian Credit Union - Teller Console") on behalf of a human operator, via the tools provided. You see the current page as a screenshot plus a list of interactive elements (role, accessible name, index).
+// Credentials are interpolated from .env at call time, never hardcoded here
+// -- the same reason cli/replay.ts's reauthenticate handler reads them from
+// the environment (see REPORT.md "Safety"). Note this still means the raw
+// value is sent to the LLM provider as part of the prompt, since the model
+// is the one typing it into the form; a production version would instead
+// auto-fill recognized credential fields outside the model's turn entirely,
+// so the value never enters the conversation. Flagged as a cut, not fixed
+// here -- see REPORT.md §7.
+const SYSTEM_PROMPT = (
+  goal: string,
+  baseUrl: string,
+  tellerId: string,
+  tellerPassword: string
+) => `You are operating a real internal banking web application ("Meridian Credit Union - Teller Console") on behalf of a human operator, via the tools provided. You see the current page as a screenshot plus a list of interactive elements (role, accessible name, index).
 
 Goal: ${goal}
 Application base URL: ${baseUrl}
 
 Rules:
 - Call exactly one tool per turn.
-- If you see a login page, log in with Teller ID "teller1" and Password "demo-pass123" (this is a dummy, non-production credential for a mock app -- it is fine to type it).
+- If you see a login page, log in with Teller ID "${tellerId}" and Password "${tellerPassword}" (a dummy, non-production credential for a mock app -- it is fine to type it).
 - Only interact with elements that are actually visible in the current observation; use their index.
 - Use "extract" to record any value the goal asks you to read (e.g. a balance), naming the output clearly in snake_case.
 - If a value you type or select came from the goal itself (e.g. a specific member ID), mark isParam=true and give it a stable paramName -- this becomes a reusable input of the resulting capability.
@@ -49,6 +63,7 @@ export interface DiscoveryRunResult {
 export async function runDiscovery(opts: DiscoveryOptions): Promise<DiscoveryRunResult> {
   const { page, goal, appId, baseUrl, allowlist, logger, runId } = opts;
   const anthropic = new Anthropic();
+  const systemPrompt = SYSTEM_PROMPT(goal, baseUrl, requireEnv("TELLER_ID"), requireEnv("TELLER_PASSWORD"));
 
   await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
 
@@ -90,7 +105,7 @@ export async function runDiscovery(opts: DiscoveryOptions): Promise<DiscoveryRun
     const response = await anthropic.messages.create({
       model: DEFAULT_MODEL,
       max_tokens: 1024,
-      system: SYSTEM_PROMPT(goal, baseUrl),
+      system: systemPrompt,
       tools: tools as unknown as Anthropic.Tool[],
       tool_choice: { type: "auto" },
       messages,
