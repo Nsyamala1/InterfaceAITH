@@ -65,14 +65,14 @@ Two independent, code-enforced mechanisms, applied identically in discovery and 
 
 **Limits, honestly**: the allowlist is a static, hand-authored config, not learned or audited automatically; redaction is pattern-based (field-name + digit-run heuristics), not a general PII classifier, and could both over-redact (a non-sensitive 6-digit number) and under-redact (sensitive text that isn't digit-shaped, e.g. a name). This is a deliberate scope choice for a project of this size, not an oversight — see §7.
 
-## Stretch goals implemented
+## 7. Cuts
 
-Two, picked for depth over breadth (per the brief's "at most one or two"):
+**Stretch goals implemented** — two, picked for depth over breadth (per the brief's "at most one or two"):
 
 - **Agent-facing capability interface** (`capability/{catalog,invoke,toolSchema}.ts`, `cli/capabilities.ts`) — saved artifacts are addressable as a named catalog, not just file paths. `--list` projects each artifact's own `parameters`/`outputs`/`description` into a tool definition in the same shape used for the discovery agent's own tool-calling (`llm/tools.ts`) — the projection can never drift from what replay actually accepts, since it's read straight off the artifact, not hand-maintained separately. `--invoke <name>` is a thin, typed front door onto the same replay engine, safety gating, and evidence logging `cli/replay.ts` already uses. This is the most direct demonstration of the brief's own framing: "the artifact becomes a reusable capability that the AI agents can invoke on demand."
 - **Multi-run stability** (`replay/stability.ts`, `cli/stability.ts`) — replays an artifact N times and reports outcome distribution plus, per step, how often each one resolved via its primary locator vs. a fallback. This reuses data `resolveLocator` (`surface/locate.ts`) already computed but every call site previously discarded; `surface/act.ts` now logs it as a `locator_resolved` evidence event on every run (discovery included), which the stability check aggregates across N fresh replay runs. Real result against this repo's own artifact: 5/5 successful runs, 7/7 steps resolved via primary locator on every run — a measured signal, not a design claim. This is also exactly the signal §4 names as the way to detect per-tenant drift without re-recording.
 
-## 7. Cuts
+**What's left out**:
 
 - **A real operator console.** Explicitly out of scope per the brief; a terminal prompt + the live browser window stands in. Real next step: a small web UI that can view the live page (via CDP screencasting or a shared VNC-like view) and record the operator's actual clicks as evidence, not just before/after screenshots.
 - **The `open_member_sub_account` artifact was not discovery-recorded.** It's a hand-authored fixture (`discoveredFrom.runId: "fixture-hand-authored-for-engine-validation"`), used to exercise the replay engine's handling of a multi-field form, a `VALIDATION_ERROR` business outcome, and the irreversible-action approval gate — all verified working (see `evidence/` and the README demo). Only one genuine discovery run was required by the brief and delivered (`lookup_member_savings_balance`, including real bugs found and fixed by actually running it — see below); given more time, the sub-account flow would also be discovery-recorded to remove the one artifact in the repo that isn't provably model-generated.
